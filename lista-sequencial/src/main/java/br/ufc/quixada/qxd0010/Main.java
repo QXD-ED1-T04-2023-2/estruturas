@@ -1,8 +1,8 @@
 package br.ufc.quixada.qxd0010;
 
 // FIXME: Lidar com "índices" negativos
-class ArrayList {
-    protected int[] vector; // vetor
+class ArrayList<E> {
+    protected transient Object[] vector; // vetor
     protected int size; // tamanho
     protected int capacity; // capacidade
 
@@ -15,11 +15,11 @@ class ArrayList {
     // FIXME: Versão que recebe parâmetro
     private void increase_capacity() {
         if (this.capacity == 0) {
-            this.vector = new int[2];
+            this.vector = new Object[2];
             this.capacity = 2;
         } else {
             int new_capacity = this.capacity * 2;
-            int[] new_vector = new int[new_capacity];
+            Object[] new_vector = new Object[new_capacity];
 
             // Cópia manual dos elementos anteriores
             for (int i = 0; i < this.size; i++) {
@@ -33,12 +33,12 @@ class ArrayList {
     }
 
     // Com deslocamento
-    public int remove(int index) throws IndexOutOfBoundsException {
+    public E remove(int index) throws IndexOutOfBoundsException {
         if (index >= this.size) {
             throw new IndexOutOfBoundsException(index);
         }
 
-        int removed = this.vector[index];
+        Object removed = this.vector[index];
 
         for (int k = index; index <= this.size - 2; k++) {
             this.vector[k] = this.vector[k + 1];
@@ -46,11 +46,12 @@ class ArrayList {
 
         this.size--;
 
-        return removed;
+        // * NOTE: Compilador reclama, mas sabemos que o tipo está correto.
+        return (E) removed;
     }
 
     // Com deslocamento
-    public void add(int index, int element) throws IndexOutOfBoundsException {
+    public void add(int index, E element) throws IndexOutOfBoundsException {
         if (index > this.size) {
             throw new IndexOutOfBoundsException(index);
         }
@@ -69,15 +70,16 @@ class ArrayList {
         this.size++; // Esqueci de adicionar durante a aula!!
     }
 
-    public int get(int index) throws IndexOutOfBoundsException {
+    public E get(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException(index);
         }
 
-        return this.vector[index];
+        // * NOTE: Compilador reclama, mas sabemos que o tipo está correto.
+        return (E) this.vector[index];
     }
 
-    public int indexOf(int element) {
+    public int indexOf(E element) {
         for (int i = 0; i < this.size; i++) {
             if (this.vector[i] == element) {
                 return i;
