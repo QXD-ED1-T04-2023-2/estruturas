@@ -11,7 +11,26 @@ class ArrayList<E> {
         this.size = 0;
     }
 
-    // FIXME: Versão que recebe parâmetro
+    private void ensureCapacity(int minCapacity) {
+        if (minCapacity <= 0) {
+            return;
+        }
+
+        int newCapacity = Math.max(2 * this.capacity, minCapacity);
+        Object[] newVector = new Object[newCapacity];
+
+        if (this.capacity != 0) {
+            // Cópia manual dos elementos anteriores
+            for (int i = 0; i < this.size; i++) {
+                newVector[i] = this.vector[i];
+            }
+        }
+
+        this.vector = null; // "Desalocar" vetor anterior
+        this.vector = newVector;
+        this.capacity = newCapacity;
+    }
+
     private void increase_capacity() {
         if (this.capacity == 0) {
             this.vector = new Object[2];
@@ -32,6 +51,7 @@ class ArrayList<E> {
     }
 
     // Com deslocamento
+    @SuppressWarnings("unchecked")
     public E remove(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException(index);
@@ -69,6 +89,7 @@ class ArrayList<E> {
         this.size++; // Esqueci de adicionar durante a aula!!
     }
 
+    @SuppressWarnings("unchecked")
     public E get(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException(index);
