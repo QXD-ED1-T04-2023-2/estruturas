@@ -1,6 +1,5 @@
 package br.ufc.quixada.qxd0010;
 
-// FIXME: Lidar com "índices" negativos
 class ArrayList<E> {
     protected transient Object[] vector; // vetor
     protected int size; // tamanho
@@ -34,7 +33,7 @@ class ArrayList<E> {
 
     // Com deslocamento
     public E remove(int index) throws IndexOutOfBoundsException {
-        if (index >= this.size) {
+        if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException(index);
         }
 
@@ -52,7 +51,7 @@ class ArrayList<E> {
 
     // Com deslocamento
     public void add(int index, E element) throws IndexOutOfBoundsException {
-        if (index > this.size) {
+        if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException(index);
         }
 
