@@ -31,22 +31,22 @@ class ArrayList<E> {
         this.capacity = newCapacity;
     }
 
-    private void increase_capacity() {
+    private void increaseCapacity() {
         if (this.capacity == 0) {
             this.vector = new Object[2];
             this.capacity = 2;
         } else {
-            int new_capacity = this.capacity * 2;
-            Object[] new_vector = new Object[new_capacity];
+            int newCapacity = this.capacity * 2;
+            Object[] newVector = new Object[newCapacity];
 
             // Cópia manual dos elementos anteriores
             for (int i = 0; i < this.size; i++) {
-                new_vector[i] = this.vector[i];
+                newVector[i] = this.vector[i];
             }
 
             this.vector = null; // "Desalocar" vetor anterior
-            this.vector = new_vector;
-            this.capacity = new_capacity;
+            this.vector = newVector;
+            this.capacity = newCapacity;
         }
     }
 
@@ -78,7 +78,7 @@ class ArrayList<E> {
         // Caso não haja capacidade disponível
         if (this.size == this.capacity) {
             // Dobra a capacidade atual
-            this.increase_capacity();
+            this.increaseCapacity();
         }
 
         for (int k = this.size - 1; k >= index; k--) {
