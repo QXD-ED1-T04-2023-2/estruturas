@@ -12,5 +12,12 @@
         <maven.compiler.source>1.20</maven.compiler.source>
         <maven.compiler.target>1.20</maven.compiler.target>
     </properties>
+    
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.9.2</version>
+        <scope>test</scope>
+    </dependency>
 
 </project>
